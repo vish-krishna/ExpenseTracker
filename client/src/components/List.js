@@ -1,7 +1,7 @@
 import React from 'react';
 import 'boxicons';
 import { default as api } from '../store/apiSlice';
-
+import { formatAmount } from '../utilities/UtilityFunctions';
 export default function List() {
     const { data, isFetching, isSuccess, isError } = api.useGetLabelsQuery();
     const [deleteTransaction] = api.useDeleteTransactionMutation();
@@ -46,6 +46,9 @@ function Transaction({ category, handler }) {
                 ></box-icon>
             </button>
             <span className='block w-full'>{category.name ?? ''}</span>
+            <span className='block w-full'>
+                ₹{formatAmount(category.amount) ?? ''}
+            </span>
         </div>
     );
 }
